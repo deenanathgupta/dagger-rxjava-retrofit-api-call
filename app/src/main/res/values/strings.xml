@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CognizantCodingTask</string>
+    <string name="failed_to_parse_response">Failed to parse response</string>
+    <string name="request_time_out">Request timeout</string>
+    <string name="network_error_heading">Network error</string>
+    <string name="network_error_message_train">Something went wrong. Please try again later</string>
+    <string name="please_wait">Please wait</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+</resources>

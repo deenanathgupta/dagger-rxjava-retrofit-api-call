@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+//For annotation processor
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.android.cognizantcodingtask"
+        minSdkVersion 25
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //Removes unnecessary locale files
+        resConfigs "en"
+    }
+
+    //Signing config
+    signingConfigs {
+        release {
+            storeFile file('signingkey/ctscodetestkey')
+            storePassword 'cts123'
+            keyAlias 'ctscodetestkey'
+            keyPassword 'cts123'
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            debuggable false
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //Enable binding support
+    dataBinding {
+        enabled = true
+    }
+
+    // If true, stop the gradle build if errors are found
+    lintOptions {
+        abortOnError false
+    }
+
+    //An automatic Parcelable implementation generator. @Parcelize annotation in kotlin data model classes
+    androidExtensions {
+        experimental = true
+    }
+
+
+    //Multi-dex support
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Support
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.core:core-ktx:$coreKtx"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+    implementation "com.google.android.material:material:$appCompat"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtension"
+
+    //Dagger for dependency injection
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    compileOnly "javax.annotation:jsr250-api:$jsr250"
+    implementation "javax.inject:javax.inject:$inject"
+
+    //RxJava & RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
+
+    //Network library
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logIntercepter"
+
+    //Data Binding
+    kapt "com.android.databinding:compiler:$data_binding"
+
+    //MultiDex
+    implementation "com.android.support:multidex:$multi_dex"
+
+    // Circular progress view
+    implementation "com.github.rahatarmanahmed:circularprogressview:$circularProgressView"
+
+    //picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //Swipe to refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeToRefresh"
+
+
+    //Testing
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
+}

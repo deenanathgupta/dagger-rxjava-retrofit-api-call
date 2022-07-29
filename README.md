@@ -1,4 +1,4 @@
-# Cognizant Coding Task
+# Rest api call
 # Technical Stack:
 1. Kotlin (Language)
 2. Android X Artifacts
